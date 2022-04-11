@@ -4,6 +4,12 @@ public class Example02
 {
     public static void main(String[] args)
     {
+        sumByWhile();
+        sumByFor();
+    }
+
+    private static void sumByWhile()
+    {
         int i = 0;
         int sum = 0;
         int oddNumSum = 0;
@@ -20,10 +26,29 @@ public class Example02
 
         /**
          * int i = 0;
+         * int total = 0;
+         *
          * while(i++ < 100)
          * {
+         *   효율에는 차이가 없지만 읽는데 편한것으로
+         *    ** if(i%2 == 0)
+         *        continue;
          *
+         *     if (i % 2 == 1)
+         *       total = total + i;
+         *
+         *     total = total + i;
          * }
+         *
+         * System.out.println("Result is " + total );
          * */
+    }
+
+    private static void sumByFor()
+    {
+        for(int i = 0; i< 100; i++)
+        {
+
+        }
     }
 }
