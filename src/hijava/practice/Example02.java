@@ -4,7 +4,7 @@ public class Example02
 {
     public static void main(String[] args)
     {
-        sumByWhile();
+//        sumByWhile();
         sumByFor();
     }
 
@@ -46,9 +46,23 @@ public class Example02
 
     private static void sumByFor()
     {
-        for(int i = 0; i< 100; i++)
+        /* 최초 1회 수행 , 반복 , 최초 1회 생략 */
+        int total = 0;
+        for(int i = 1; i<= 100; i++)
         {
-
+            System.out.println(" i = " + i);
+            total = total + i;
         }
+        System.out.println("Result is " + total );
+
+       /*
+         int total = 0;
+         for(int i = 100; i >= 1; i--)
+         {
+             System.out.println(" i = " + i);
+             total = total + i;
+         }
+         System.out.println("Result is " + total );
+        */
     }
 }
