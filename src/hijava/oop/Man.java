@@ -67,4 +67,10 @@ public class Man
 //        this.amount -= ( price * count + (price * count) * 0.1 ); 부가세 별도
         this.amount -= price * count;
     }
+
+    public void sayHello()
+    {
+        System.out.println("안녕하세요");
+        System.out.println("제 이름은 " + this.getName() + " 입니다. ");
+    }
 }
