@@ -21,4 +21,9 @@ public class Son extends Mom
     {
         System.out.println("Son Said ... ");
     }
+
+    public void drinkMilk()
+    {
+        System.out.println("우유 먹자");
+    }
 }

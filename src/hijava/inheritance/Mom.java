@@ -36,4 +36,9 @@ public class Mom
     {
         System.out.println("Mom Said ... ");
     }
+
+    public void drinkBeer()
+    {
+        System.out.println("맥주 마시자");
+    }
 }

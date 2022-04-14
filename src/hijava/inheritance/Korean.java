@@ -8,4 +8,9 @@ public class Korean extends Man
     {
         super(name);
     }
+
+    public void eatRice()
+    {
+        System.out.println("밥을 먹습니다.");
+    }
 }
