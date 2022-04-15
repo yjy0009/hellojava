@@ -14,8 +14,8 @@ public class InheritanceTest
         eat(mom);
         eat(son);
 
-        drik(mom);
-        drik(son);
+        drink(mom);
+        drink(son);
 
         System.out.println(son.getName());
 
@@ -45,7 +45,7 @@ public class InheritanceTest
             System.out.println("해당 Instance 가 없습니다.");
     }
 
-    private static void drik(Mom mom)
+    private static void drink(Mom mom)
     {
         if(mom instanceof Son)
             ((Son) mom).drinkMilk();
