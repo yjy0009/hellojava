@@ -21,5 +21,10 @@ public class Test
         TestInterFace.out(8);
 
         Dog.eat("Meat");
+
+        int[] arr = new int[]{1, 2, 5, 9};
+        SubTotal st = new SubTotal();
+        st.sum(arr);
+        System.out.println("Total = " + st.sum(arr));
     }
 }
