@@ -10,7 +10,7 @@ package hijava.jdkbase;
  * 메모리안에 1,2,3, 이따로 있고 arr의 주소가 변경되는것이 아닌것이기 때문에
  * Error 나지 않음
  */
-public class Student implements Cloneable
+public class Student implements Cloneable, Comparable
 {
     //private int id;
     private String id;
@@ -51,7 +51,7 @@ public class Student implements Cloneable
     @Override
     public String toString()
     {
-        return name + "(" + ((id==null) ? "0" : id) + ")";
+        return name + "(" + ((id == null) ? "0" : id) + ")";
     }
 
     @Override
@@ -61,6 +61,16 @@ public class Student implements Cloneable
         Student s = (Student) super.clone();
         s.name = "복제본 " + s.name;
         return s;
+    }
+
+    // 어떤순서대로 정렬할건지 ...
+    @Override
+    public int compareTo(Object o)
+    {
+        Student obj = (Student) o;
+        System.out.println("comp=" + this.id + "-" + obj.id);
+//        return Integer.parseInt(this.id) - Integer.parseInt(obj.id); // 작은순서 대로
+        return (Integer.parseInt(this.id) - Integer.parseInt(obj.id)) * -1; // 큰 순서 대로
     }
 
     // hashCode : JVM 의 위치
@@ -113,5 +123,6 @@ public class Student implements Cloneable
 
         System.out.println(student1);
     }
+
 
 }
