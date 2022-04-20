@@ -16,4 +16,20 @@ public class Dog extends Animal
     {
         System.out.println("Dog food : " + food);
     }
+
+    @Override
+    public String toString()
+    {
+        return "This is Dog";
+    }
+
+    public static void main(String[] args)
+    {
+        Dog d = new Dog();
+        System.out.println(d.toString());
+
+        /* 객체 인스턴스가 String 화 될때 toString() 호출 */
+        String s = "Test:" +  d ;
+        System.out.println(s);
+    }
 }
