@@ -2,14 +2,31 @@ package hijava.stream;
 
 import hijava.jdkbase.Student;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
+
+/**
+ * Stream 을 쓰는 이유는 메모리를 적게쓰고 고성능의 효율을 내기 위함!!
+ * PipeLine(Stream)
+ *
+ * #쓰기
+ * FileOutputStream > OutputStreamWriter > BufferedWriter (write(), flush(), close())
+ *
+ * #읽기
+ * FileInputStream > InputStreamReader > BufferedReader (readLine())
+ *
+ * FOS > OSW > BW
+ * 1byte 씩 전달 OSW(UTF-8 가변형 (2~4byte) 에게 BW 2byte + 3byte (8192 다담길때 까지 기다림)
+ *
+ * */
 public class StreamMain
 {
+    private static final String FILE = "test.txt";
+
     public static void main(String[] args)
     {
         List<Student> students = new ArrayList<>();
@@ -67,6 +84,101 @@ public class StreamMain
         students2.stream().filter(n -> Integer.parseInt(n.getId()) >= 90).sorted().forEach(e -> System.out.println(e));
 //      Arrays.stream(arr2).filter(n -> Integer.parseInt(n.getId()) >= 90).sorted().forEach(e -> System.out.println(e));
 
+        writeFile("세종대왕 한글 123");
+        readFile();
 
+
+    }
+
+    private static void readFile()
+    {
+        try(FileInputStream fis = new FileInputStream(FILE))
+        {
+           InputStreamReader isr = new InputStreamReader(fis,CHARSET);
+           BufferedReader br = new BufferedReader(isr);
+           String data = null;
+           while((data = br.readLine()) != null)
+               System.out.println(data);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+//            System.out.println("test.txt 파일이 존재 하지 않습니다. >> " + e.getMessage());
+        }
+        catch (IOException e) // FileNotFoundException 이 IOException 의 자식
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private static void readFile0()
+    {
+        try(FileInputStream fis = new FileInputStream(FILE))
+        {
+            int data = 0;
+//            byte[] buffer = new byte[10];
+            while((data = fis.read()) != -1)
+                System.out.println((char)data);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+//            System.out.println("test.txt 파일이 존재 하지 않습니다. >> " + e.getMessage());
+        }
+        catch (IOException e) // FileNotFoundException 이 IOException 의 자식
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * fos -> byte 단위로 처리 되기 때문에 한글 일본어 다 깨짐
+     * osw 를 쓰면 성능이 떨어져서 bufferdwirter 를 사용
+     * */
+    private static final String CHARSET = "UTF-8";
+    private static void writeFile(String content)
+    {
+        File file = new File(FILE);
+        try(FileOutputStream fos = new FileOutputStream(file))
+        {
+            OutputStreamWriter osw = new OutputStreamWriter(fos,CHARSET);
+            BufferedWriter bw = new BufferedWriter(osw);
+            bw.write(content);
+            bw.flush();
+            bw.close(); //오류날 상황이 많은 경우에는 finally 에
+
+            System.out.println("Write OK : " + file.getAbsolutePath());
+
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+//            System.out.println("test.txt 파일이 존재 하지 않습니다. >> " + e.getMessage());
+        }
+        catch (IOException e) // FileNotFoundException 이 IOException 의 자식
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeFile0(String content)
+    {
+        File file = new File(FILE);
+        try(FileOutputStream fos = new FileOutputStream(file))
+        {
+            fos.write(content.getBytes());
+
+            System.out.println("Write OK : " + file.getAbsolutePath());
+
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+//            System.out.println("test.txt 파일이 존재 하지 않습니다. >> " + e.getMessage());
+        }
+        catch (IOException e) // FileNotFoundException 이 IOException 의 자식
+        {
+            e.printStackTrace();
+        }
     }
 }
